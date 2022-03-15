@@ -1,0 +1,12 @@
+{
+  "name": "Mesba7",
+  "description": "Generate Random arabic words",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://unpkg.com/vue@3 'unsafe-inline' 'unsafe-eval';"
+  }
+}
