@@ -14,13 +14,10 @@ const App = () => {
   function getText() {
     setIsLoading(true);
     setIsCopied(false);
-    console.log(
-      `https://api.mesba7.com/sample?sentences_count=${count}&category=${category}&vocalized=${isVocalized}`
-    );
     fetch(
       `https://api.mesba7.com/${
         category == "random" ? "random" : "sample"
-      }?sentences_count=${count}&category=${category}&vocalized=${isVocalized}`
+      }?sentences_count=${count}&category=${category}&vocalized=${isVocalized}&extension=true`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -43,18 +40,24 @@ const App = () => {
   return (
     <div className="App p-5 bg-gray-100 mt-3">
       <header className="flex items-center justify-between px-3 ">
-        <img src={logo} className="w-10 rounded" alt="logo" />
+        <a href="https://mesba7.com/" target="_blank"><img src={logo} className="w-10 rounded" alt="logo" /></a>
         <h2>مولد النصوص العربية</h2>
       </header>
       <div className="text-generator px-3 my-3">
         <h3 className="text-lg text-gray-900 my-3 font-bold">الاعدادات</h3>
-        <section className="flex items-start flex-col gap-3 mb-6">
-          <div className="options flex items-center justify-between gap-3 text-gray-700 w-1/3">
+        <section
+          className=" grid grid-cols-3
+          gap-3
+          mx-auto
+          my-3
+      "
+        >
+          <div className="options flex items-start flex-col justify-between gap-3 text-gray-700 ">
             <p className="font-bold">عدد الجمل</p>
             <input
               type="number"
               min="1"
-              max="100"
+              max="10"
               value={count}
               onChange={(e) => {
                 setCount(e.target.value);
@@ -62,12 +65,12 @@ const App = () => {
               className="border border-gray-500 focus:border-gray-800 rounded text-lg w-1/2 p-1 outline-none"
             />
           </div>
-          <div className=" flex items-center justify-between  gap-3 text-gray-700 w-1/3">
+          <div className=" flex items-start flex-col justify-between  gap-3 text-gray-700 ">
             <p className="font-bold">التكرار</p>
             <input
               type="number"
               min="1"
-              max="100"
+              max="10"
               value={repetition}
               onChange={(e) => {
                 setRepetition(e.target.value);
@@ -75,7 +78,7 @@ const App = () => {
               className="border border-gray-500 focus:border-gray-800 rounded text-lg w-1/2 p-1 outline-none"
             />
           </div>
-          <div className=" flex items-center justify-between  gap-3 text-gray-700 w-1/3">
+          <div className=" flex items-start flex-col justify-between  gap-3 text-gray-700 ">
             <p className="font-bold">النوع</p>
             <select
               className="w-1/2 p-1"
@@ -127,7 +130,7 @@ const App = () => {
       {!isLoading && (
         <div className="text-generated p-4 text-gray-800">
           {text.map((repeted) => (
-            <p className="p-1 my-2">
+            <p className="p-1 my-2 text-lg">
               {repeted.map((p) => (
                 <p> {p} </p>
               ))}
